@@ -1,14 +1,19 @@
 n = int(input().strip())
-a = list(map(int, input().split()))
+rating = list(map(int, input().split()))
 
-sorted_a = sorted(a, reverse=True)
-rank = {}
-current_rank = 1
+rank = [-1] * n
+pairs = [(r, i) for i, r in enumerate(rating)]
+pairs.sort(reverse=True)
 
-for i in range(n):
-    if sorted_a[i] not in rank:
-        rank[sorted_a[i]] = current_rank
-    current_rank += 1
-for x in a:
-    print(rank[x], end=" ")
-    
+count = 1
+seen = {}
+
+for r, i in pairs:
+    if r in seen:
+        rank[i] = seen[r]  # same rank as previous if tie
+    else:
+        rank[i] = count
+        seen[r] = count
+    count += 1
+
+print(*rank)

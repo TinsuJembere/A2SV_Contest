@@ -1,23 +1,17 @@
 t = int(input().strip())
 
-for _ in range(t):
-    s = input().strip()
-    n = len(s)
-    found = False
-
+for j in range(t):
+    num = input().strip()
+    n = len(num)
     for i in range(1, n):
-        a = s[:i]
-        b = s[i:]
+        prefix = num[:i]
+        suffix = num[i:]
 
-        if (len(a) > 1 and a[0] == "0") or (len(b) > 1 and b[0] == "0"):
+        if prefix[0] == "0" or suffix[0] == "0":
             continue
-
-        a_val = int(a)
-        b_val = int(b)
-
-        if a_val > 0 and b_val > 0 and b_val > a_val:
-            print(a_val, b_val)
-            found = True
+        if int(prefix) < int(suffix):
+            print(f"{prefix} {suffix}")
             break
-    if not found:
+
+    else:
         print(-1)
