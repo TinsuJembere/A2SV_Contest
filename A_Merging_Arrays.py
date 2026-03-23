@@ -1,30 +1,17 @@
-import sys
+n, m = map(int, input().split())
+a = list(map(int, input().split()))
+b = list(map(int, input().split()))
 
-def solve():
-    input_data = sys.stdin.read().split()
-    if not input_data:
-        return
-    
-    n = int(input_data[0])
-    m = int(input_data[1])
-    
-    a = list(map(int, input_data[2:2+n]))
-    b = list(map(int, input_data[2+n:]))
-    
-    res = []
-    i = 0  
-    j = 0 
-    while i < n and j < m:
-        if a[i] <= b[j]:
-            res.append(a[i])
-            i += 1
-        else:
-            res.append(b[j])
-            j += 1
+l1, l2 = 0, 0
+res = []
+while l1 < n and l2 < m:
+    if a[l1] < b[l2]:
+        res.append(a[l1])
+        l1 += 1
+    else:
+        res.append(b[l2])
+        l2 += 1
+res.extend(a[l1:])
+res.extend(b[l2:])
 
-    res.extend(a[i:])
-    res.extend(b[j:])
-    print(*(res))
-
-if __name__ == "__main__":
-    solve()
+print(*res)
